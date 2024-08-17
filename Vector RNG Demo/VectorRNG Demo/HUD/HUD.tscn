@@ -42,7 +42,8 @@ offset_right = 164.0
 offset_bottom = -10.0
 grow_vertical = 0
 text = "Vector RNG
-Demo by: Xalkomak"
+Demo by: Xalkomak
+Follow on Twitter: @XalkomakDev"
 
 [node name="Discalimer" type="Label" parent="."]
 z_index = 1
