@@ -1,0 +1,179 @@
+[gd_scene load_steps=10 format=3 uid="uid://bumlxf6oxdjol"]
+
+[ext_resource type="Script" path="res://VectorRNG Demo/Test3D/Test3d.gd" id="1_wl8wg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4u40w"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_e5hpn"]
+sky_material = SubResource("ProceduralSkyMaterial_4u40w")
+
+[sub_resource type="Environment" id="Environment_lmymn"]
+background_mode = 2
+sky = SubResource("Sky_e5hpn")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_futfw"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ni0p"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_m8a46"]
+flip_faces = true
+radius = 2.5
+height = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_h62u5"]
+flip_faces = true
+size = Vector3(4, 2, 3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_78s8b"]
+size = Vector2(4, 3)
+
+[node name="Test3D" type="Node3D"]
+script = ExtResource("1_wl8wg")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -640.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(640, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 5)
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(640, 0)
+points = PackedVector2Array(0, 0, 0, 720)
+width = 6.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 1
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(640, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/SubViewport"]
+transform = Transform3D(-4.37114e-08, -0.707107, 0.707107, 0, 0.707107, 0.707107, -1, 3.09086e-08, -3.09086e-08, 5, 5, 0)
+
+[node name="GenerateButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -42.0
+offset_right = 97.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(97, 16)
+text = "Generate Random Point"
+
+[node name="SwitchShapeButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -82.0
+offset_right = 97.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(97, 16)
+text = "Change Shape"
+
+[node name="PointerLocation" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = 10.0
+offset_right = 133.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "Pointer's Current Location: (0, 0, 0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShapeInfo" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 139.0
+offset_bottom = 33.0
+text = "Sphere Radius: 0"
+
+[node name="SceneInfo" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(100, 440)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -220.0
+offset_right = 110.0
+offset_bottom = 220.0
+grow_vertical = 2
+bbcode_enabled = true
+text = "[u][font size=32]Scene Info[/font][/u]
+
+The red sphere serves as a pointer as to where it will land when the \"Generate Random Point\" is pressed with respect to its centroid."
+scroll_active = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lmymn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Pointer" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_futfw")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ni0p")
+
+[node name="DisplayShapes" type="Node3D" parent="."]
+
+[node name="SphereDisplay" type="MeshInstance3D" parent="DisplayShapes"]
+unique_name_in_owner = true
+mesh = SubResource("SphereMesh_m8a46")
+skeleton = NodePath("../..")
+
+[node name="BoxDisplay" type="MeshInstance3D" parent="DisplayShapes"]
+unique_name_in_owner = true
+visible = false
+mesh = SubResource("BoxMesh_h62u5")
+skeleton = NodePath("../..")
+
+[node name="PlaneDisplay" type="MeshInstance3D" parent="DisplayShapes"]
+unique_name_in_owner = true
+visible = false
+mesh = SubResource("PlaneMesh_78s8b")
+skeleton = NodePath("../..")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="GenerateButton" to="." method="_on_generate_button_pressed"]
+[connection signal="pressed" from="SwitchShapeButton" to="." method="_on_switch_shape_button_pressed"]

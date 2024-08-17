@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://crkwp8hwtsgbg"]
+
+[ext_resource type="Script" path="res://VectorRNG Demo/Test2D/Test2d.gd" id="1_24mn1"]
+[ext_resource type="Texture2D" uid="uid://d3jw62gus71bf" path="res://icon.svg" id="2_obtbt"]
+[ext_resource type="Texture2D" uid="uid://c2il3veucx5vd" path="res://Ring.svg" id="3_w52vv"]
+[ext_resource type="Texture2D" uid="uid://olxrcx7g4x33" path="res://Box.svg" id="4_2wxer"]
+
+[node name="Test2D" type="Node2D"]
+script = ExtResource("1_24mn1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GenerateButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -42.0
+offset_right = 97.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(97, 16)
+text = "Generate Random Point"
+
+[node name="SwitchShapeButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -82.0
+offset_right = 97.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(97, 16)
+text = "Change Shape"
+
+[node name="PointerLocation" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = 10.0
+offset_right = 133.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "Pointer's Location: (640, 360)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShapeInfo" type="Label" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 139.0
+offset_bottom = 33.0
+text = "Circle Radius: 0"
+
+[node name="SceneInfo" type="RichTextLabel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(400, 166)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -83.0
+offset_right = 410.0
+offset_bottom = 83.0
+grow_vertical = 2
+bbcode_enabled = true
+text = "[u][font size=32]Scene Info[/font][/u]
+
+The Godot icon serves as a pointer as to where it will land when the \"Generate Random Point\" is pressed with respect to its center (around the nose)."
+scroll_active = false
+
+[node name="Pointer" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_obtbt")
+
+[node name="DisplayShapes" type="Node2D" parent="."]
+
+[node name="RingDisplay" type="Sprite2D" parent="DisplayShapes"]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+scale = Vector2(5, 5)
+texture = ExtResource("3_w52vv")
+
+[node name="SquareDisplay" type="Sprite2D" parent="DisplayShapes"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(640, 360)
+scale = Vector2(9, 5)
+texture = ExtResource("4_2wxer")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="CanvasLayer/GenerateButton" to="." method="_on_generate_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SwitchShapeButton" to="." method="_on_switch_shape_button_pressed"]

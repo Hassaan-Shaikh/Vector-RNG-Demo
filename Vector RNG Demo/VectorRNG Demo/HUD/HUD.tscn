@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7eyqis5fucks"]
+
+[ext_resource type="Script" path="res://VectorRNG Demo/HUD/Hud.gd" id="1_xn0cj"]
+[ext_resource type="PackedScene" uid="uid://crkwp8hwtsgbg" path="res://VectorRNG Demo/Test2D/Test2D.tscn" id="2_d5h7a"]
+[ext_resource type="PackedScene" uid="uid://bumlxf6oxdjol" path="res://VectorRNG Demo/Test3D/Test3D.tscn" id="3_3v82x"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xn0cj")
+
+[node name="Test2D" parent="." instance=ExtResource("2_d5h7a")]
+
+[node name="Test3D" parent="." instance=ExtResource("3_3v82x")]
+
+[node name="SwitchScene" type="Button" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -164.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 41.0
+grow_horizontal = 0
+text = "Switch to 2D Scene"
+
+[node name="WhoMadeThis" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -59.0
+offset_right = 164.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "Vector RNG
+Demo by: Xalkomak"
+
+[node name="Discalimer" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -59.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Please note that all the graphics (meshes and sprites) are
+for visual purposes and only take into account the position
+and size to verify the random generation boundaries."
+
+[connection signal="pressed" from="SwitchScene" to="." method="_on_switch_scene_pressed"]
