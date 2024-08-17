@@ -14,7 +14,7 @@ config/name="Vector RNG Demo"
 config/description="This demo showcases the use of a custom made class that uses RandomNumberGenerator to generate random points in both 2D and 3D spaces."
 run/main_scene="res://VectorRNG Demo/HUD/HUD.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://thumbnail.png"
 
 [debug]
 
