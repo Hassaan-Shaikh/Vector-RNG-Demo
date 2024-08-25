@@ -32,7 +32,7 @@ flip_faces = true
 size = Vector3(4, 2, 3)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_78s8b"]
-size = Vector2(4, 3)
+size = Vector2(4, 2)
 
 [node name="Test3D" type="Node3D"]
 script = ExtResource("1_wl8wg")

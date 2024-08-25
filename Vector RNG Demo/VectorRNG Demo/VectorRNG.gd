@@ -39,22 +39,42 @@ func rand_inside_unit_cube(origin: Vector3 = Vector3.ZERO, dimensions: Vector3 =
 ## determine where the point will be generated.
 ## Works in 3D space.
 func rand_on_unit_plane(origin: Vector3 = Vector3.ZERO, dimensions: Vector2 = Vector2.ONE, orientation: Vector3 = Vector3.UP) -> Vector3:
-	var x_min: float = origin.x - dimensions.x / 2
-	var x_max: float = origin.x + dimensions.x / 2
+	var x_min: float = 0.0
+	var x_max: float = 0.0
 	
-	var y_min: float = origin.y - dimensions.y / 2
-	var y_max: float = origin.y + dimensions.y / 2
+	var y_min: float = 0.0
+	var y_max: float = 0.0
+	
+	match orientation:
+		Vector3.UP: # Ignore Y-Axis
+			x_min = origin.x - dimensions.x / 2
+			x_max = origin.x + dimensions.x / 2
+			
+			y_min = origin.z - dimensions.y / 2
+			y_max = origin.z + dimensions.y / 2
+		Vector3.RIGHT: # Ignore X-Axis
+			x_min = origin.y - dimensions.x / 2
+			x_max = origin.y + dimensions.x / 2
+			
+			y_min = origin.z - dimensions.y / 2
+			y_max = origin.z + dimensions.y / 2
+		Vector3.FORWARD: #Ignore Z-Axis
+			x_min = origin.x - dimensions.x / 2
+			x_max = origin.x + dimensions.x / 2
+			
+			y_min = origin.y - dimensions.y / 2
+			y_max = origin.y + dimensions.y / 2
 	
 	var x_point: float = randf_range(x_min, x_max)
 	var y_point: float = randf_range(y_min, y_max)
 	
 	var composed_point: Vector3 = Vector3.ZERO
 	match orientation:
-		Vector3.UP:
+		Vector3.UP: # Ignore Y-Axis
 			composed_point = Vector3(x_point, origin.y, y_point)
-		Vector3.RIGHT:
+		Vector3.RIGHT: # Ignore X-Axis
 			composed_point = Vector3(origin.x, x_point, y_point)
-		Vector3.FORWARD:
+		Vector3.FORWARD: #Ignore Z-Axis
 			composed_point = Vector3(x_point, y_point, origin.z)
 	return composed_point
 
